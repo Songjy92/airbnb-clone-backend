@@ -36,17 +36,34 @@ class Room(CommonModel):
     owner = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="rooms",
     )
-    amenities = models.ManyToManyField("rooms.Amenity")
+    amenities = models.ManyToManyField(
+        "rooms.Amenity",
+        related_name="rooms",
+    )
     category = models.ForeignKey(
         "categories.Category",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="rooms",
     )
 
     def __str__(self) -> str:
         return self.name
+
+    def rating(self):
+        count = self.reviews.count()
+        if count == 0:
+            return "No reviews"
+        else:
+            total_rating = 0
+            # self.reviews.all() 로 전체를 가져오지 않고 특정값만 지정해서 가져오기
+            for review in self.reviews.all().values("rating"):
+                total_rating += review["rating"]
+
+            return round(total_rating / count, 2)
 
 
 class Amenity(CommonModel):

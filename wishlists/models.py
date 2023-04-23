@@ -8,14 +8,17 @@ class Wishlist(CommonModel):
     rooms = models.ManyToManyField(
         "rooms.Room",
         blank=True,
+        related_name="wishlists",
     )
     exeriences = models.ManyToManyField(
         "experiences.Experience",
         blank=True,
+        related_name="wishlists",
     )
     user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="wishlists",
     )
 
     def __str__(self) -> str:

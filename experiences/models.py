@@ -20,6 +20,7 @@ class Experience(CommonModel):
     host = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="experiences",
     )
     price = models.PositiveIntegerField()
     address = models.CharField(max_length=250)
