@@ -2,7 +2,14 @@ from rest_framework import serializers
 from .models import Category
 
 
-class CategorySerializer(serializers.Serializer):
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
+        # exclude = ("created_at",)
+
+
+"""
     name = serializers.CharField(
         required=True,
         max_length=50,
@@ -21,3 +28,4 @@ class CategorySerializer(serializers.Serializer):
         instance.kind = validated_data.get("kind", instance.kind)
         instance.save()
         return instance
+"""
