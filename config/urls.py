@@ -19,6 +19,7 @@ from django.urls import path, include
 # path 의 첫번째 argument는 유저가 이동할 url, 두번째 arg 는 url접근 시 사용할 함수
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/rooms", include("rooms.urls")),
+    path("api/rooms/", include("rooms.urls")),
     path("api/categories/", include("categories.urls")),
+    path("api/experiences/", include("experiences.urls")),
 ]
